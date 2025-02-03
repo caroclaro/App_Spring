@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="estilos(titulo)">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title th:text="${titulo}"></title>
+
+    <!-- load stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" th:href="@{/font-awesome-4.5.0/css/font-awesome.min.css}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!-- Bootstrap style -->
+    <link rel="stylesheet" th:href="@{/css/hero-slider-style.css}">
+    <!-- Hero slider style (https://codyhouse.co/gem/hero-slider/) -->
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+    <!-- Magnific popup style (http://dimsemenov.com/plugins/magnific-popup/) -->
+    <link rel="stylesheet" th:href="@{/css/templatemo-style.css}">
+    <link rel="stylesheet" th:href="@{/css/boton.css}">
+
+    <link rel="stylesheet" th:href="@{/css/hover.css}">
+
+</head>
+<body>
+
+
+<div th:fragment="navegante" class="cd-slider-nav">
+    <nav class="navbar">
+        <div class="tm-navbar-bg">
+
+            <a class="navbar-brand text-uppercase" href="#"><i
+                    class="fa-solid fa-snowflake tm-home-fa"></i>Plantitas</a>
+
+            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse"
+                    data-target="#tmNavbar">
+                &#9776;
+            </button>
+            <div class="collapse navbar-toggleable-md text-xs-center text-uppercase tm-navbar" id="tmNavbar">
+                <ul class="nav navbar-nav">
+                    <p><a th:href="@{/}" class="owo">Inicio</a></p>
+                    <p><a th:href="@{/categoria}" class="owo">Categorías</a></p>
+                    <p><a th:href="@{/todosLosProductos}" class="owo">Todos los productos</a></p>
+                    <p><a th:href="@{/sobreNosotros}" class="owo">Sobre Nosotros</a></p>
+                    <p><a th:href="@{/contactanos}" class="owo">Contáctanos</a></p>
+                    <p><a th:href="@{/cart/pedido}" class="owo">Carro</a></p>
+
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+</div>
+
+
+<footer th:fragment="footer" class="tm-footer">
+
+    <div class="tm-social-icons-container text-xs-center">
+        <a href="#" class="tm-social-link"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="tm-social-link"><i class="fa fa-google-plus"></i></a>
+        <a href="#" class="tm-social-link"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="tm-social-link"><i class="fa fa-behance"></i></a>
+        <a href="#" class="tm-social-link"><i class="fa fa-linkedin"></i></a>
+    </div>
+
+    <!--        <p class="tm-copyright-text">Copyright &copy; 2016 Your Company-->
+
+    <!--            - Design: <a rel="nofollow" href="http://www.templatemo.com/page/1" class="tm-footer-link" target="_parent">Templatemo</a></p>-->
+
+</footer>
+
+
+<script th:fragment="scriptGoogle">
+    // Ajuste de la altura de la página
+    function adjustHeightOfPage(pageNo) {
+        var offset = 80;
+        var pageContentHeight = 0;
+
+        var pageType = $('div[data-page-no="' + pageNo + '"]').data("page-type");
+
+        if (pageType != undefined && pageType == "gallery") {
+            pageContentHeight = $(".cd-hero-slider li:nth-of-type(" + pageNo + ") .tm-img-gallery-container").height();
+        } else {
+            pageContentHeight = $(".cd-hero-slider li:nth-of-type(" + pageNo + ") .js-tm-page-content").height();
+        }
+
+        if ($(window).width() >= 992) {
+            offset = 120;
+        } else if ($(window).width() < 480) {
+            offset = 40;
+        }
+
+        var totalPageHeight = 15 + $('.cd-slider-nav').height()
+            + pageContentHeight + offset
+            + $('.tm-footer').height();
+
+        if (totalPageHeight > $(window).height()) {
+            $('.cd-hero-slider').addClass('small-screen');
+            $('.cd-hero-slider li:nth-of-type(' + pageNo + ')').css("min-height", totalPageHeight + "px");
+        } else {
+            $('.cd-hero-slider').removeClass('small-screen');
+            $('.cd-hero-slider li:nth-of-type(' + pageNo + ')').css("min-height", "100%");
+        }
+    }
+
+    $(document).ready(function () {
+        adjustHeightOfPage(1); // Ajusta la altura de la página al cargar
+
+        // Configuración de galería
+        $('.gallery-one').magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            gallery: {enabled: true}
+        });
+
+        $('.gallery-two').magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            gallery: {enabled: true}
+        });
+
+        $('.gallery-three').magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            gallery: {enabled: true}
+        });
+
+        $('#tmNavbar a').click(function () {
+            $('#tmNavbar').collapse('hide');
+            adjustHeightOfPage($(this).data("no"));
+        });
+
+        $(window).resize(function () {
+            var currentPageNo = $(".cd-hero-slider li.selected .js-tm-page-content").data("page-no");
+            setTimeout(function () {
+                adjustHeightOfPage(currentPageNo);
+            }, 1000);
+        });
+
+        // Remover el preloader
+        $('body').addClass('loaded');
+    });
+
+    // Cargar Google Maps
+    function loadGoogleMap() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initialize';
+        script.async = true;  // Cargar asincrónicamente
+        script.onerror = function () {
+            console.error("Error al cargar Google Maps");
+        };
+        document.body.appendChild(script);
+    }
+
+    function initialize() {
+        var mapOptions = {
+            zoom: 15,
+            center: new google.maps.LatLng(37.769725, -122.462154),
+            scrollwheel: false
+        };
+
+        var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+
+        google.maps.event.addDomListener(map, 'idle', function () {
+            calculateCenter();
+        });
+
+        google.maps.event.addDomListener(window, 'resize', function () {
+            map.setCenter(center);
+        });
+    }
+
+    function calculateCenter() {
+        center = map.getCenter();
+    }
+
+    // Cargar el mapa cuando el DOM esté listo
+    $(function () {
+        loadGoogleMap(); // Carga el mapa de Google
+    });
+</script>
+
+
+</body>
+
+</html>

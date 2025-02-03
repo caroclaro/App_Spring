@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{fragmentoTodosProductos :: productos('Todos Los Productos - Plantitas')}"></head>
+    <body>
+            <div class="cd-hero">
+                <div th:replace="~{fragmento :: navegante}"> </div>
+                <div class="cd-hero">
+                    <ul class="cd-hero-slider">
+                        <!-- Page 4 Gallery Three -->
+                        <li class="selected">
+                            <div class="cd-full-width">
+                                <div class="container-fluid js-tm-page-content" data-page-no="4" data-page-type="gallery">
+                                    <div class="tm-img-gallery-container">
+                                        <div th:each="product:${products}" class="grid-item">
+                                            <figure>
+                                                <img th:src="@{${product.getImage()}}" alt="Image" class="img-fluid tm-img">
+                                                <figcaption>
+                                                    <h2 class="tm-figure-title" th:text="${product.getName()}">Nombre del producto</h2>
+                                                    <p class="tm-figure-description" th:text="${product.getDescription()}">Descripción del producto</p>
+                                                    <h3 class="tm-figure-title" th:text="${medias[product.id]}+ ' ✮'"></h3>
+                                                    <p th:text="${#numbers.formatDecimal(product.getPrice(),1,2,'COMMA')+ ' €'}"></p>
+                                                    <a th:href="@{/productPorNum/{id}(id=${product.getId()})}">Ver más</a>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </body>
+
+    <script th:src="@{/js/jquery-1.11.3.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/hero-slider-main.js}"></script>
+    <script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+
+</html>
+
+
+
+
+
+

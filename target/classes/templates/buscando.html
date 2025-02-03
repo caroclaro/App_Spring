@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{fragmento :: estilos('Categorías - Plantitas')}"></head>
+
+<body>
+
+        <div class="cd-hero">
+            <div th:replace="~{fragmento :: navegante}"></div>
+
+            <div class="cd-hero">
+                <ul class="cd-hero-slider">
+                <li class="selected">
+                    <div class="cd-full-width">
+                        <div class="container-fluid js-tm-page-content" data-page-no="2" data-page-type="gallery">
+                            <div class="tm-img-gallery-container">
+                                <div class="tm-img-gallery gallery-one">
+                                    <div class="tm-img-gallery-info-container">
+                                        <h2 class="tm-text-title tm-gallery-title tm-white"><span class="tm-white">¿Qué estás buscando?</span></h2>
+                                        <p class="tm-text">Somos una tienda especializada en plantas exteriores, interiores, árboles y herramientas de jardinería. ¡Descubre nuestra amplia selección y encuentra lo que necesitas para tu jardín!</p>
+                                    </div>
+                                    <div th:each="category:${categories}" class="grid-item">
+                                        <figure class="effect-ruby">
+                                            <img th:src="@{${category.getImage()}}" alt="Image" class="img-fluid tm-img">
+                                            <figcaption>
+                                                <h2 class="tm-figure-title"><span  th:text="${category.getName()}">Nombre :O</span ></h2>
+                                                <p class="tm-figure-description" th:text="${category.getDescription()}">Embellece tu jardín con nuestra selección de plantas de exterior robustas y vibrantes.</p>
+        <!--                                        <a href="/categoria/${category.getCategoryId()}">Ver más</a>-->
+                                                <a th:href="@{/categoria/{id}(id=${category.getCategoryId()})}">Ver más</a>
+
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </body>
+        <script th:src="@{/js/jquery-1.11.3.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/hero-slider-main.js}"></script>
+        <script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+        <script>
+            function calculateCenter() {
+                center = map.getCenter();
+            }
+
+            function loadGoogleMap() {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' + 'callback=initialize';
+                document.body.appendChild(script);
+            }
+
+            // DOM is ready
+            $(function () {
+                loadGoogleMap(); // Google Map
+            });
+        </script>
+</html>
+
+
+
+
+
+
