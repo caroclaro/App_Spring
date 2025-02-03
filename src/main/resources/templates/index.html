@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmento :: estilos('Plantitas')}">
+
+</head>
+
+<body>
+<div class="cd-hero">
+    <div th:replace="~{fragmento :: navegante}"> </div>
+    <ul class="cd-hero-slider">
+
+        <li class="selected">
+            <div class="cd-full-width">
+                <div class="container-fluid js-tm-page-content tm-page-pad" data-page-no="1">
+                    <div class="row">
+                        <div class="tm-3-col-container">
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 tm-3-col-textbox">
+                                <div class="text-xs-left tm-textbox tm-textbox-padding tm-bg-white-translucent tm-3-col-textbox-inner">
+                                    <i class="fa fa-4x fa-pagelines tm-home-fa"></i>
+                                    <h2 class="tm-text-title">¿Te gustan las plantas?</h2>
+                                    <p class="tm-text"> Tenemos plantas, plantitas, plantotas, plantazas, plantiñas, plantaletas, cactus, cactusitos, cactusotes, arbolitos, plantas carnivoras, plantas vegetarianas, plantas.</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 tm-3-col-textbox">
+                                <div class="text-xs-left tm-textbox tm-textbox-padding tm-bg-white-translucent tm-3-col-textbox-inner">
+                                    <i class="fa fa-4x fa-leaf tm-home-fa"></i>
+                                    <h2 class="tm-text-title">¡Bienvenidos!</h2>
+                                    <p class="tm-text">Está es nuestra nueva tienda de plantas.</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 tm-3-col-textbox">
+                                <div class="text-xs-left tm-textbox tm-textbox-padding tm-bg-white-translucent tm-3-col-textbox-inner">
+                                    <i class="fa  fa-4x fa-solid fa-heart tm-home-fa"></i>
+                                    <h2 class="tm-text-title">Hopecore</h2>
+                                    <p class="tm-text">Tiriririn tiriririn tiriririn , las plantas no tienen enemigos, encuentra paz en tu hogar.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <footer th:replace="~{fragmento :: footer}">  </footer>
+
+</div>
+    <div id="loader-wrapper">
+
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div>
+
+
+    <script th:src="@{/js/jquery-1.11.3.min.js}" ></script>
+    <script th:src="@{/js/bootstrap.min.js}" ></script>
+    <script th:src="@{/js/hero-slider-main.js}" ></script>
+    <script th:src="@{/js/jquery.magnific-popup.min.js}" ></script>
+    <script th:replace="fragmento :: scriptGoogle"></script>
+
+</body>
+</html>

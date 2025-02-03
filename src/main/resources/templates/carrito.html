@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{fragmentoCarrito :: productos('Carrito - Plantitas')}"></head>
+
+<body>
+<div class="cd-hero">
+    <div th:replace="~{fragmento :: navegante}"></div>
+
+    <div class="cd-hero">
+        <ul class="cd-hero-slider">
+            <!-- Page 4 Gallery Three -->
+            <li class="selected">
+                <div class="cd-full-width">
+                    <div class="container-fluid js-tm-page-content" data-page-no="4" data-page-type="gallery">
+                        <div class="tm-img-gallery-container">
+                            <div th:each="carrito : ${productosEnCarrito}" class="grid-item">
+                                <figure>
+                                    <img th:src="@{${carrito.product.image}}" alt="Image" class="img-fluid tm-img">
+                                    <figcaption>
+                                        <h2 class="tm-figure-title" th:text="${carrito.product.name}"></h2>
+                                        <p class="tm-figure-description" th:text="${carrito.cantidad}"></p>
+                                        <!--                                            <p th:text="${carrito.product.price} + ' €' "></p>-->
+                                        <p th:text="${#numbers.formatDecimal(carrito.product.price,1,2,'COMMA')+ ' €'}"></p>
+
+                                        <p th:text="${#numbers.formatDecimal(carrito.cantidad*carrito.product.price,1,2,'COMMA')+ ' €'} "></p>
+
+
+                                        <button><a href="#"
+                                                   th:href="@{/cart/delete/{id}(id=${carrito.productInCartId})}">Eliminar
+                                            este producto</a></button>
+                                    </figcaption>
+                                </figure>
+                            </div>
+
+                        </div>
+                        <p th:text="${#numbers.formatDecimal(precio,1,2,'COMMA')+ ' €'}" class="precio"></p>
+                    </div>
+
+                    <button><a href="#" th:href="@{/cart/delete/all}">Eliminar toda la compra</a></button>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>
+</body>
+
+<script th:src="@{/js/jquery-1.11.3.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/hero-slider-main.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+
+</html>
+
+
+
+
+
+

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="~{fragmentoProductNum :: productNum(' Detalle del Producto - Plantitas')}"></head>
+<body>
+<div th:replace="~{fragmento :: navegante}"></div>
+<div class="container"></div>
+<div class="container">
+    <div class="product-image">
+        <img th:src="@{${product.getImage()}}" alt="Producto">
+    </div>
+    <div class="product-info">
+        <h2 class="product-title"><span th:text="${product.getName()}"></span></h2>
+        <p class="product-description">
+            <span th:text="${product.getDescription()}"></span>
+        </p>
+        <!--                <p class="product-price"><span th:text="${product.getPrice() + ' €'}"></span></p>-->
+        <p class="product-price" th:text="${#numbers.formatDecimal(product.getPrice(),1,2,'COMMA') + ' €'}"></p>
+
+        <!--                <a href="#" class="button" th:onclick="${productInCart.save(${product.getId()})}">Añadir al carrito</a>-->
+        <a href="#" th:href="@{/cart/add/{productId}(productId=${product.id})}" class="button">Añadir al carrito</a>
+
+    </div>
+
+</div>
+<div class="container">
+    <div class="product-info">
+
+        <div th:if="${valorations!=null && !valorations.isEmpty()}">
+            <h1 th:text="${media}"></h1>
+            <div id="lienzo"></div>
+
+            <script th:inline="javascript">
+
+                const pintar = document.getElementById("lienzo");
+                console.log(pintar)
+                let a = [[${media}]];
+                console.log(isNaN(a))
+                //let im=document.createElement("img")
+                console.log(a)
+                if (a < 0.5) {
+                    // pintar.innerHTML = "Valoración baja";
+                    pintar.innerHTML = "<img src='[(@{/img/0.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+                    // im.src ="@{/img/0}"
+                } else if (a >= 0.5 && a < 1.0) {
+                    // pintar.innerHTML = "Valoración regular";
+                    pintar.innerHTML = "<img src='[(@{/img/05.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+
+                } else if (a >= 1 && a < 1.5) {
+                    // pintar.innerHTML = "Valoración aceptable";
+                    pintar.innerHTML = "<img src='[(@{/img/1.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+
+                } else if (a >= 1.5 && a < 2.0) {
+                    // pintar.innerHTML = "Valoración buena";
+                    pintar.innerHTML = "<img src='[(@{/img/15.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+
+                } else if (a >= 2.0 && a < 2.5) {
+                    // pintar.innerHTML = "Valoración muy buena";
+                    pintar.innerHTML = "<img src='[(@{/img/2.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+
+                } else if (a >= 2.5 && a < 3.0) {
+                    // pintar.innerHTML = "Valoración excelente";
+                    pintar.innerHTML = "<img src='[(@{/img/25.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+
+                } else if (a >= 3.0 && a < 3.5) {
+                    pintar.innerHTML = "<img src='[(@{/img/3.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+
+                    // pintar.innerHTML = "Valoración sobresaliente";
+                } else if (a >= 3.5 && a < 4.0) {
+                    pintar.innerHTML = "<img src='[(@{/img/35.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+
+
+                    // pintar.innerHTML = "Valoración excelente";
+                } else if (a >= 4.0 && a < 4.5) {
+                    // pintar.innerHTML = "Valoración perfecta";
+                    pintar.innerHTML = "<img src='[(@{/img/4.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+
+                } else if (a >= 4.5 && a < 5.0) {
+                    // pintar.innerHTML = "Valoración perfecta";
+                    pintar.innerHTML = "<img src='[(@{/img/45.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+                } else {
+                    pintar.innerHTML = "<img src='[(@{/img/5.jpg})]' width='500px' class='img-fluid tm-img' alt='foto'> ";
+
+                }
+            </script>
+            <div th:each="v:${valorations}">
+                <div class="comment">
+                    <h2 class="comment-name"><span th:text="${v.nombrePersona}"></span></h2>
+                    <h3 class="comment-date"><span th:text="${v.fecha}"></span></h3>
+                    <h4 class="comment-text"><span th:text="${v.comentario}"></span></h4>
+                    <h5>
+              <span th:if="${v.getValor() < 0.5}">
+                  <img th:src="@{/img/0.jpg}"/>
+              </span>
+                        <span th:if="${v.getValor() >= 0.5 && v.getValor() < 1.0}">
+                  <img th:src="@{/img/05.jpg}"/>
+              </span>
+                        <span th:if="${v.getValor() >= 1.0 && v.getValor() < 1.5}">
+                  <img th:src="@{/img/1.jpg}"/>
+              </span>
+                        <span th:if="${v.getValor() >= 1.5 && v.getValor() < 2.0}">
+                  <img th:src="@{/img/15.jpg}"/>
+              </span>
+                        <span th:if="${v.getValor() >= 2.0 && v.getValor() < 2.5}">
+                  <img th:src="@{/img/2.jpg}"/>
+              </span>
+                        <span th:if="${v.getValor() >= 2.5 && v.getValor() < 3.0}">
+                  <img th:src="@{/img/25.jpg}"/>
+              </span>
+                        <span th:if="${v.getValor() >= 3.0 && v.getValor() < 3.5}">
+                  <img th:src="@{/img/3.jpg}"/>
+              </span>
+                        <span th:if="${v.getValor() >= 3.5 && v.getValor() < 4.0}">
+                  <img th:src="@{/img/35.jpg}"/>
+              </span>
+                        <span th:if="${v.getValor() >= 4.0 && v.getValor() < 4.5}">
+                  <img th:src="@{/img/4.jpg}"/>
+              </span>
+                        <span th:if="${v.getValor() >= 4.5 && v.getValor() < 5.0}">
+                  <img th:src="@{/img/45.jpg}"/>
+              </span>
+                        <span th:if="${v.getValor() == 5.0}">
+                  <img th:src="@{/img/5.jpg}"/>
+              </span>
+                    </h5>
+
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${valorations == null || valorations.isEmpty()}">
+            <h4 class="no-comments">
+                <span th:text="'No hay comentarios...'"></span>
+            </h4>
+        </div>
+    </div>
+
+</div>
+<script th:src="@{/js/jquery-1.11.3.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/hero-slider-main.js}"></script>
+<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+
+
+</body>
+</html>
