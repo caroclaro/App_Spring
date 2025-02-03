@@ -1,0 +1,35 @@
+button {
+    background-color: #4CAF50; /* Verde oscuro */
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* Efectos de hover */
+button:hover {
+    background-color: #388E3C; /* Verde más oscuro */
+    transform: scale(1.05); /* Hace que el botón crezca ligeramente */
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Efecto cuando pasas el mouse por encima del enlace */
+button a:hover {
+    text-decoration: underline;
+}
+
+/* Sombra suave */
+button {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
